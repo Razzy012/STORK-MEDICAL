@@ -1,4 +1,28 @@
 /* Write your global styles here, in PostCSS syntax */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+body{
+    box-sizing: border-box;
+    background-color: #fafafa;
+    font-family: 'Inter', sans-serif;
+}
+
+input{
+    border: solid 1px #d8d8d8;
+    border-radius: 10px;
+    padding-left: 8px;
+}
+
+input:hover{
+    border-color: #a3a3a3;
+}
+
+input:focus{
+    outline: none;
+}
