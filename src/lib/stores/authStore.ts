@@ -1,11 +1,7 @@
 import { writable } from 'svelte/store'
 
-const authStore = writable<{
-    isLoggedIn: boolean,
-}>({
-    isLoggedIn: false
-});
-
-export default {
-    set: authStore.set,
-}
+export const authStore = writable({
+    isLoggedIn: false,
+    name: null,
+    roles: {},
+    });

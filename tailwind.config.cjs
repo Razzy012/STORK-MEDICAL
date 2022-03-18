@@ -2,6 +2,10 @@ const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
+		borderColor: ({ theme }) => ({
+			...theme('colors'),
+			DEFAULT: theme('colors.frame-border', 'currentColor'),
+		}),
 		extend: {		
 			colors: {
 			'background': '#FAFAFA',
@@ -17,6 +21,6 @@ const config = {
 			},
 		},
 	plugins: []
-}};
+	}};
 
 module.exports = config;
