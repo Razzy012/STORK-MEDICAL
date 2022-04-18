@@ -4,4 +4,4 @@ export const authStore = writable({
     isLoggedIn: false,
     name: null,
     roles: {},
-    });
+});

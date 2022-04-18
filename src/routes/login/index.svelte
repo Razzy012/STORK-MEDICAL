@@ -38,14 +38,14 @@
 <div class="h-screen flex place-items-center justify-center">
     <div class="relative border p-6 pb-4 rounded bg-white border-frame-border">
         <div class="absolute -top-20">
-            <div class="ml-8 text-5xl stork text-red-600 flex place-items-center">
+            <div class="ml-8 text-5xl stork text-red flex place-items-center">
                 <div class="inline-block w-20"><Stork /></div>
-                <div>Stork</div>
+                <div translate="no">Stork</div>
             </div>
         </div>
         <div class="text-center text-2xl">Přihlášení</div>
         <label for="email" class="block mt-2">Email</label>
-        <input on:keyup={submit} type="email" name="email" bind:this={email} class="pl-3 h-[2.625rem] rounded-full" class:e_email><br>
+        <input type="email" name="email" bind:this={email} class="pl-3 h-[2.625rem] rounded-full" class:e_email><br>
         <label for="password" class="block mt-2">Heslo</label>
         <input on:keyup={submit} type="password" name="password" bind:this={password} class="pl-3 h-[2.625rem] rounded-full" class:e_password><br>
         <div class="mt-4 max-w-fit m-auto"><Button onclick={loginWithEmail}>Login</Button></div>
