@@ -29,7 +29,7 @@
                         <User />
                     </div>
                 </div>
-                <div class="absolute top-[4.25rem] -right-[0.55rem] text-lg text-center border border-frame-border rounded bg-white hidden transition-all ease-in-out">
+                <div class="absolute top-[4.25rem] -right-[0.55rem] text-lg text-center border border-frame-border rounded bg-white hidden">
                     <div class="relative user-menu p-1 z-10 hover:bg-hover-field cursor-pointer"><a href="/users/profile">Profil</a></div>
                     <div class="b-triangle absolute -top-[15px] right-[23.5px] w-0 h-0 border-b-[15px] border-l-[9.23px] border-r-[9.23px] border-l-transparent border-r-transparent border-frame-border"></div>
                     <div class="absolute -top-[13px] right-[23.5px] w-0 h-0 border-b-[15px] border-l-[9.23px] border-r-[9.23px] border-l-transparent border-r-transparent border-white"></div>

@@ -29,8 +29,6 @@
     {/each}
 </div>
 
-
-
 <a href='/newFirm' class="absolute bottom-8 right-8 w-[60px] h-[60px] flex justify-center items-center rounded-full cursor-pointer text-5xl bg-white border border-frame-border hover:bg-hover-field hover:border-hover-frame-border">
     <Plus />
 </a>

@@ -120,6 +120,7 @@
 
 			await setDoc(doc(firestore, 'firms', firm.ico), props);
 			history.pushState({}, null, `/${firm.ico}`);
+			document.title = firm.name;
 		}
 	};
 
