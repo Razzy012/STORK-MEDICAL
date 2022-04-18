@@ -8,6 +8,7 @@
     import { doc, deleteDoc } from "firebase/firestore";
     import { firestore } from '$lib/utils/firebase';
     import { goto } from '$app/navigation';
+    import { browser } from '$app/env';
 
     let defaultFirm = {
 		name: '',
@@ -23,9 +24,12 @@
 		attention: false
 	};
 
+    if (browser)
+        document.title = 'Nová firma';
+
     let firmCopy = {};
 
-    if ($page.params.ico !== 'newFirm') {
+    $: if ($page.params.ico !== 'newFirm') {
         let firm = $firms.filter(firm => firm.ico + '' === $page.params.ico)[0];
 
         for(const key in firm) {
@@ -39,15 +43,17 @@
         };
 
         firmCopy = {...defaultFirm, ...firmCopy}
+        if (browser)
+            document.title = firmCopy.name;
     }
 
     const deleteFirm = async () => {
-        await deleteDoc(doc(firestore, "firms", firm.ico+''));
+        await deleteDoc(doc(firestore, "firms", firmCopy.ico + ''));
     }
 
     const confirmDeleteFirm = () => {
         setPopup(ConfirmAction_form, {
-            message: `Přejete si odstranit <b>${firm.name}</b>?<br>Tento krok již nepůjde vzít zpět.`,
+            message: `Přejete si odstranit <b>${firmCopy.name}</b>?<br>Tento krok již nepůjde vzít zpět.`,
             choice1F: () => {deleteFirm(); removePopup(); goto('/')},   
         })
     }
