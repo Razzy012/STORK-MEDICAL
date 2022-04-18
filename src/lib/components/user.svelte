@@ -4,7 +4,7 @@
     import { createEventDispatcher } from "svelte";
     import { doc, updateDoc, deleteDoc } from "firebase/firestore";
     import { firestore } from "$lib/utils/firebase";
-    import { authStore } from '$lib/stores/authStore'
+    import { authStore } from '$lib/stores/authStore';
 
     export let userDoc: {roles: any; name: any; uid: string;};
 
@@ -48,35 +48,20 @@
 
 </script>
 
-<tr>
-    <td>{userDoc.name}</td>
-    <td>
-        <div>
-            {#if role === 'admin+'}
-                <div class="pl-10">admin+</div>
-            {:else if userDoc.name === $authStore.name}
-                <div class="pl-10">{role}</div>
-            {:else}
-                <Select {options} bind:choosed={role} on:valueChanged={update}/>
-            {/if}
-        </div>
-    </td>
-    <td>
-        {#if (role != "admin+" && userDoc.name != $authStore.name)}
-            <div class="ml-auto w-4 h-4 hover:cursor-pointer" on:click={remove}><Xmark /></div>
+<div class="basis-[65%]">{userDoc.name}</div>
+<div class='basis-[30%]'>
+    <div>
+        {#if role === 'admin+'}
+            <div class="pl-10">admin+</div>
+        {:else if userDoc.name === $authStore.name}
+            <div class="pl-10">{role}</div>
+        {:else}
+            <Select {options} bind:choosed={role} on:valueChanged={update} buttonCSS={'h-10'}/>
         {/if}
-    </td>
-</tr>
-
-
-
-<style>
-    tr {
-        border-bottom: solid 1px #d8d8d8;
-        height: 4.6875rem;
-    }
-    
-    tr:last-child {
-        border-bottom: none;
-    }
-</style>
+    </div>
+</div>
+<div class='basis-[5%] ml-auto'>
+    {#if (role != "admin+" && userDoc.name != $authStore.name)}
+        <div class="ml-auto w-4 h-4 hover:cursor-pointer" on:click={remove}><Xmark /></div>
+    {/if}
+</div>

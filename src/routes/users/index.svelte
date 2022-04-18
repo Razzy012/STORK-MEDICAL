@@ -1,15 +1,15 @@
 <script lang="ts">
     import { firestore } from '$lib/utils/firebase';
     import { collection, getDocs } from "firebase/firestore";
-    import User from '$lib/components/user.svelte'
+    import User from '$lib/components/user.svelte';
     import ConfirmAction_Form from '$lib/components/confirmAction_Form.svelte';
-    import NewUser_Form from '$lib/components/newUser_Form.svelte'
-    import Button from '$lib/components/Button.svelte'
+    import NewUser_Form from '$lib/components/newUser_Form.svelte';
+    import Button from '$lib/components/Button.svelte';
+    import { setPopup, removePopup } from '$lib/stores/popUpStore';
+    import { flip } from 'svelte/animate';
+    import { fade } from 'svelte/transition';
 
     let usersDocs: {roles: any; name: any; uid: string;}[] = [];
-
-    let newUserFormHTML: HTMLDivElement;
-    let confirmFormHTML: HTMLDivElement;
 
     (async () => {
         let usersDocsx
@@ -21,29 +21,23 @@
         } catch (e){}
     })();
 
-    let action: Function;
-    let message: String;
-
     const removeUser = e => {
         usersDocs = usersDocs.filter(v => v.uid != e.detail.uid);
     }
 
     const displayNewUser = e => {
-        newUserFormHTML.classList.remove('invisible', 'pointer-events-none');
-    }
-
-    const hideNewUser = e => {
-        newUserFormHTML.classList.add('invisible', 'pointer-events-none');
+        setPopup(NewUser_Form, {
+            submitAction: (roles, name, uid) => {
+                usersDocs = [...usersDocs, {'roles': roles, 'name': name, 'uid': uid}];
+                removePopup();
+            }
+        });
     }
 
     const displayActionConfirm = e => {
-        confirmFormHTML.classList.remove('hidden');
-        action = e.detail;
-        message = 'Přejete si odstranit uživatele?';
-    }
-
-    const hideActionConfirm = e => {
-        confirmFormHTML.classList.add('hidden');
+        const action = () => {e.detail(), removePopup()};
+        let message = 'Přejete si odstranit uživatele?';
+        setPopup(ConfirmAction_Form, {message: message, choice1F: action});
     }
 
 </script>
@@ -57,39 +51,18 @@
         <h1 class="inline-block pb-[1.125rem] text-2xl text-left">Uživatelé</h1>
         <Button onclick={displayNewUser}>Přidat uživatele</Button>
     </div>
-    <div class="mt-3 bg-white border rounded w-[40rem] pl-6 pr-6 border-frame-border">
-        <table class="w-full">
-            <tr>
-                <th class="w-[24rem] text-left">Uživatel</th>
-                <th class="w-[148px] text-left pl-10">Role</th>
-                <th></th>
-            </tr>
+    <div class="mt-3 bg-white border rounded w-[40rem] pl-6 pr-6 border-frame-border transition-all duration-200">
+        <div class="flex flex-col w-full">
+            <div class="h-[2.7rem] flex items-center">
+                <div class="font-bold basis-[65%]">Uživatel</div>
+                <div class="font-bold basis-[30%] pl-10">Role</div>
+                <div class="basis-[5%]"></div>
+            </div>
             {#each usersDocs as userDoc, i (userDoc)}
-                <User bind:userDoc={usersDocs[i]} on:remove?={displayActionConfirm} on:remove={removeUser}/>
+                <div animate:flip={{duration: 200}} transition:fade|local={{duration: 200}} class='h-[4.6rem] border-t border-frame-border flex items-center'>
+                    <User bind:userDoc={usersDocs[i]} on:remove?={displayActionConfirm} on:remove={removeUser}/>
+                </div>
             {/each}
-        </table>
+        </div>
     </div>
 </div>
-
-<div bind:this={newUserFormHTML} class='absolute top-0 left-0 bg-black bg-opacity-20 h-screen w-screen flex invisible pointer-events-none place-items-center justify-center'>
-    <NewUser_Form bind:usersDocs on:hide={hideNewUser} />
-</div>
-
-<div bind:this={confirmFormHTML} class='flex absolute top-0 left-0 bg-black bg-opacity-20 h-screen w-screen hidden place-items-center justify-center'>
-    <ConfirmAction_Form {action} {message} on:hide={hideActionConfirm} />
-</div>
-
-<style>
-    tr {
-        border-bottom: solid 1px #d8d8d8;
-        height: 4.6875rem;
-    }
-    
-    tr:nth-child(1) {
-        height: 2.625rem;
-    }
-
-    tr:last-child {
-        border-bottom: none;
-    }
-</style>

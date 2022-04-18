@@ -33,6 +33,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/svelte-virtual-list": "^3.0.1",
 		"firebase": "^9.6.7"
 	}
 }

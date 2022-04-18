@@ -23,5 +23,6 @@ input:hover{
 }
 
 input:focus{
+    border-color: black;
     outline: none;
 }
