@@ -196,7 +196,9 @@
 							style="-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none"
 							bind:clientHeight={itemHeight}
 						>
-							{option}
+							<div class='min-w-max'>
+								{option}
+							</div>
 						</li>
 					{/each}
 				</ul>
