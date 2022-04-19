@@ -15,10 +15,10 @@
 
 <div class="bg-white w-screen h-19 border-b border-frame-border">
     <div class="h-full flex place-items-center justify-between">
-        <div class="ml-8 text-5xl stork text-red flex place-items-center">
+        <a href="/" class="ml-8 text-5xl stork text-red flex place-items-center cursor-pointer">
             <div class="inline-block w-20"><Stork /></div>
             <div translate="no">Stork</div>
-        </div>
+        </a>
         <div class="relative flex place-items-center">
             <div class="mr-14 text-2xl animated-underline"><a href="/" class="focus:outline-none">Adresář</a></div>
             <div class="mr-14 text-2xl animated-underline"><a href="/fakturace" class="focus:outline-none">Fakturace</a></div>

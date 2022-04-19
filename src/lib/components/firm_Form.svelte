@@ -7,7 +7,10 @@
 	import unsavedInputPreventNavigation from "$lib/stores/unsavedInputPreventNavigation";
 	import { doc, setDoc } from "firebase/firestore";
 	import { firestore } from '$lib/utils/firebase';
-  	const { store, preventAction } = unsavedInputPreventNavigation();
+	import { beforeNavigate } from '$app/navigation';
+
+	const { store, preventAction, checkNavigation } = unsavedInputPreventNavigation();
+	beforeNavigate(checkNavigation);
 	
 	interface firm {
 		name: string;
@@ -158,13 +161,13 @@
 			<div class="flex gap-3 place-items-start flex-col lg:flex-row xl:flex-col 2xl:flex-row">
 				<div class="flex gap-3 place-items-center">
 					<div>od</div>
-					<Select bind:choosed={firm.dateFrom.month} options={months} maxVisibleOptions={5} {buttonCSS}/>
-					<Select bind:choosed={firm.dateFrom.year} options={years} maxVisibleOptions={5} {buttonCSS}/>
+					<Select bind:choosed={firm.dateFrom.month} options={months} maxVisibleOptions={5} {buttonCSS} on:valueChanged={()=>store.set(true)}/>
+					<Select bind:choosed={firm.dateFrom.year} options={years} maxVisibleOptions={5} {buttonCSS} on:valueChanged={()=>store.set(true)}/>
 				</div>
 				<div class="flex gap-3 place-items-center">
 					<div>do</div>
-					<Select bind:choosed={firm.dateUntill.month} options={months} maxVisibleOptions={5} {buttonCSS}/>
-					<Select bind:choosed={firm.dateUntill.year} options={years} maxVisibleOptions={5} {buttonCSS}/>
+					<Select bind:choosed={firm.dateUntill.month} options={months} maxVisibleOptions={5} {buttonCSS} on:valueChanged={()=>store.set(true)}/>
+					<Select bind:choosed={firm.dateUntill.year} options={years} maxVisibleOptions={5} {buttonCSS} on:valueChanged={()=>store.set(true)}/>
 				</div>
 				<div class="flex place-items-center">
 					<div class='mr-3'>cena</div>

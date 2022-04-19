@@ -20,7 +20,7 @@
     </div>
     {#each $firms as firm (firm.ico)}
         <div class="relative" animate:flip>
-            <a href={`/${firm.ico}`} class="flex h-[4.6rem] items-center border-t border-frame-border cursor-pointer before:content-[''] before:absolute before:-left-[10px] before:top-[1px] before:rounded before:w-[calc(100%+20px)] before:h-[calc(100%-1px)] hover:before:bg-hover-field">
+            <a href={`/${firm.ico}`} class="flex h-14 items-center border-t border-frame-border cursor-pointer before:content-[''] before:absolute before:-left-[10px] before:top-[1px] before:rounded before:w-[calc(100%+20px)] before:h-[calc(100%-1px)] hover:before:bg-hover-field">
                 <div class="basis-[30%] z-10">{firm.name}</div>
                 <div class="basis-[20%] z-10">{firm.ico}</div>
                 <div class="basis-1/2 z-10">{firm.residence}</div>

@@ -83,6 +83,8 @@
 	};
 
 	const scroll = (e) => {
+		if (maxVisibleOptions === 0) 
+			return;
 		e.preventDefault();
 		if (e.wheelDelta < 0) {
 			if (dropDownHeight - dropDownVisibleHeight > -1 * parseInt(dropDownList.style.top, 10) + 20)
@@ -177,7 +179,7 @@
 	<div data-drop-down-menu class="relative" bind:this={dropDownMenu} style:width={itemWidth ? 'calc(' + itemWidth + 'px + 14px)' : '0px'}>
 		<div class="absolute left-3 z-10">
 			<div
-				class="relative overflow-hidden box-content border z-20 border-frame-border hover:border-hover-frame-border rounded-[20px]"
+				class="relative overflow-hidden box-content border z-20 border-frame-border hover:border-hover-frame-border rounded"
 				style:width={itemWidth ? 'calc(' + itemWidth + 'px - 1px)' : '0px'} style:height={(itemHeight * maxVisibleOptions) ? (itemHeight * maxVisibleOptions) + 'px' : dropDownHeight + 'px'}
 			>
 				<ul
@@ -190,7 +192,7 @@
 					{#each options as option}
 						<li
 							on:click={valueChanged}
-							class="px-[0.35rem] pb-1 pt-1 text-center cursor-default bg-white hover:bg-hover-field"
+							class="px-[0.35rem] pb-1 pt-1 text-center cursor-default first:rounded-t-[9px] last:rounded-b-[9px] bg-white hover:bg-hover-field"
 							style="-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none"
 							bind:clientHeight={itemHeight}
 						>
@@ -214,11 +216,4 @@
 </div>
 
 <style>
-	li:nth-child(1) {
-		border-radius: 19px 19px 0 0;
-	}
-
-	li:last-child {
-		border-radius: 0 0 19px 19px;
-	}
 </style>
